@@ -11,31 +11,34 @@ use Tests\TestCase;
 
 class FooBarServiceProviderTest extends TestCase
 {
-    public function testServiceProvider(){
+    public function testServiceProvider()
+    {
         $foo1 = $this->app->make(Foo::class);
         $foo2 = $this->app->make(Foo::class);
 
-        $this->assertSame($foo1,$foo2);
+        $this->assertSame($foo1, $foo2);
 
         $bar1 = $this->app->make(Bar::class);
         $bar2 = $this->app->make(Bar::class);
 
-        $this->assertSame($bar1,$bar2);
+        $this->assertSame($bar1, $bar2);
 
-        $this->assertSame($foo1,$bar1->foo);
-        $this->assertSame($foo2,$bar2->foo);
+        $this->assertSame($foo1, $bar1->foo);
+        $this->assertSame($foo2, $bar2->foo);
     }
 
-    public function testPropertySingletons(){
+    public function testPropertySingletons()
+    {
         $helloService1 = $this->app->make(HelloService::class);
         $helloService2 = $this->app->make(HelloService::class);
 
-        self::assertSame($helloService1,$helloService2);
+        $this->assertSame($helloService1, $helloService2);
 
-        self::assertEquals("Halo Iqbal",$helloService1->hello('Iqbal'));
+        $this->assertEquals("Halo Iqbal", $helloService1->hello('Iqbal'));
     }
 
-    public function testEmpty(){
+    public function testEmpty()
+    {
         self::assertTrue(true);
     }
 }

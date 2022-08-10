@@ -22,12 +22,12 @@ class FooBarServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        // echo "FooBarServiceProvider";
-        $this->app->singleton(Foo::class,function ($app) {
+        // echo "FooBarServiceProvider" . PHP_EOL;
+        $this->app->singleton(Foo::class, function ($app) {
             return new Foo();
         });
 
-        $this->app->singleton(Bar::class,function ($app) {
+        $this->app->singleton(Bar::class, function ($app) {
             return new Bar($app->make(Foo::class));
         });
     }
@@ -44,6 +44,6 @@ class FooBarServiceProvider extends ServiceProvider implements DeferrableProvide
 
     public function provides()
     {
-        return [Foo::class,Bar::class,HelloService::class];
+        return [Foo::class, Bar::class, HelloService::class];
     }
 }
