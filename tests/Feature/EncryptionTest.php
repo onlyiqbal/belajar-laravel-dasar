@@ -9,12 +9,13 @@ use Tests\TestCase;
 
 class EncryptionTest extends TestCase
 {
-    public function testEncryption(){
+    public function testEncryption()
+    {
         $encrypt = Crypt::encrypt('Iqbal');
         var_dump($encrypt);
 
         $decrypt = Crypt::decrypt($encrypt);
-        
-        $this->assertEquals('Iqbal',$decrypt);
+
+        $this->assertEquals('Iqbal', $decrypt);
     }
 }

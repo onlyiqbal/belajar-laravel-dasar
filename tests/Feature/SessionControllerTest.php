@@ -8,25 +8,26 @@ use Tests\TestCase;
 
 class SessionControllerTest extends TestCase
 {
-    public function testSession(){
+    public function testSession()
+    {
         $this->get('/session/create')
-        ->assertSeeText('OK')
-        ->assertSessionHas('userId')
-        ->assertSessionHas('isMember');
+            ->assertSeeText('OK')
+            ->assertSessionHas('userId')
+            ->assertSessionHas('isMember');
     }
 
-    public function testGetSessionSuccess(){
+    public function testGetSessionSuccess()
+    {
         $this->withSession([
             'userId' => 'iqbal',
             'isMember' => 'true'
         ])->get('/session/get')
-        ->assertSeeText('User Id : iqbal Is Member : true');
+            ->assertSeeText('User Id : iqbal Is Member : true');
     }
 
-    public function testGetSessionFaild(){
-        $this->withSession([
-
-        ])->get('/session/get')
-        ->assertSeeText('User Id : guest Is Member : false');
+    public function testGetSessionFaild()
+    {
+        $this->withSession([])->get('/session/get')
+            ->assertSeeText('User Id : guest Is Member : false');
     }
 }

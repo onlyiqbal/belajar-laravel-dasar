@@ -9,21 +9,23 @@ use Tests\TestCase;
 
 class FileStorageTest extends TestCase
 {
-    public function testStorage() {
+    public function testStorage()
+    {
         $fileSystem = Storage::disk('local');
-        $fileSystem->put('file.txt','Iqbal Maulana Menggala');
+        $fileSystem->put('file.txt', 'Iqbal Maulana Menggala');
 
         $content = $fileSystem->get('file.txt');
 
-        $this->assertEquals('Iqbal Maulana Menggala',$content);
+        $this->assertEquals('Iqbal Maulana Menggala', $content);
     }
 
-    public function testPublic() {
+    public function testPublic()
+    {
         $fileSystem = Storage::disk('public');
-        $fileSystem->put('file.txt','Iqbal Maulana Menggala');
+        $fileSystem->put('file.txt', 'Iqbal Maulana Menggala');
 
         $content = $fileSystem->get('file.txt');
 
-        $this->assertEquals('Iqbal Maulana Menggala',$content);
+        $this->assertEquals('Iqbal Maulana Menggala', $content);
     }
 }

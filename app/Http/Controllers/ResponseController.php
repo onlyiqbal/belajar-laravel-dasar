@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ResponseController extends Controller
 {
-    public function response(Request $request): Response {
+    public function response(Request $request): Response
+    {
         return response('Hello Response');
     }
 
-    public function header(Request $request): Response {
+    public function header(Request $request): Response
+    {
         $body = [
             'firstName' => 'iqbal',
             'middleName' => 'maulana',
@@ -21,19 +23,21 @@ class ResponseController extends Controller
         ];
 
         return response(json_encode($body), 200)
-        ->header('Content-Type','application/json')
-        ->withHeaders([
-            'Author' => 'iqbal',
-            'App' => 'Belajar Laravel Dasar'
-        ]);
+            ->header('Content-Type', 'application/json')
+            ->withHeaders([
+                'Author' => 'iqbal',
+                'App' => 'Belajar Laravel Dasar'
+            ]);
     }
 
-    public function responseView(Request $request): Response {
+    public function responseView(Request $request): Response
+    {
         return response()
-        ->view('hello',['name' => 'iqbal']);
+            ->view('hello', ['name' => 'iqbal']);
     }
 
-    public function responseJson(Request $request): JsonResponse {
+    public function responseJson(Request $request): JsonResponse
+    {
         $body = [
             'firstName' => 'iqbal',
             'middleName' => 'maulana',
@@ -41,16 +45,18 @@ class ResponseController extends Controller
         ];
 
         return response()
-        ->json($body);
+            ->json($body);
     }
 
-    public function responseFile(Request $request): BinaryFileResponse {
+    public function responseFile(Request $request): BinaryFileResponse
+    {
         return response()
-        ->file(storage_path('app/public/pictures/logoumika.png'));
+            ->file(storage_path('app/public/pictures/logoumika.png'));
     }
 
-    public function responseDownload(Request $request): BinaryFileResponse {
+    public function responseDownload(Request $request): BinaryFileResponse
+    {
         return response()
-        ->download(storage_path('app/public/pictures/logoumika.png'),'logoumika.png');
+            ->download(storage_path('app/public/pictures/logoumika.png'), 'logoumika.png');
     }
 }

@@ -77,8 +77,8 @@ Route::get('/produk-redirect/{id}', function (string $id) {
     ]);
 });
 
-Route::get('/controller/hello/{name}', [HelloController::class, 'hello']);
 Route::get('/controller/hello/request', [HelloController::class, 'request']);
+Route::get('/controller/hello/{name}', [HelloController::class, 'hello']);
 
 Route::get('/input/hello', [InputController::class, 'hello']);
 Route::post('/input/hello', [InputController::class, 'hello']);
@@ -88,9 +88,9 @@ Route::post('/input/hello/array', [InputController::class, 'arrayInput']);
 Route::get('/input/query/string', [InputController::class, 'queryString']);
 Route::get('/input/query/string/array', [InputController::class, 'queryStringArray']);
 Route::post('/input/type', [InputController::class, 'inputType']);
-Route::post('/input/filter/only', [InputController::class, 'inputOnly']);
-Route::post('/input/filter/except', [InputController::class, 'inputExcept']);
-Route::post('/input/filter/merge', [InputController::class, 'inputMerge']);
+Route::post('/input/filter/only', [InputController::class, 'filterOnly']);
+Route::post('/input/filter/except', [InputController::class, 'filterExcept']);
+Route::post('/input/filter/merge', [InputController::class, 'filterMerge']);
 
 Route::post('/file/upload', [FileController::class, 'upload'])->withoutMiddleware([VerifyCsrfToken::class]);
 
@@ -114,15 +114,16 @@ Route::get('/redirect/to', [RedirectController::class, 'redirectTo']);
 Route::get('/redirect/from', [RedirectController::class, 'redirectFrom']);
 Route::get('/redirect/name', [RedirectController::class, 'redirectName']);
 Route::get('/redirect/name/{name}', [RedirectController::class, 'redirectHello'])->name('redirect-hello');
+Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
+Route::get('/redirect/away', [RedirectController::class, 'redirectAway']);
 Route::get('/redirect/named', function () {
+    // Bisa dengan 3 cara
     return url()->route('redirect-hello', ['name' => 'iqbal']);
     // return route('redirect-hello', ['name' => 'iqbal']);
     // return URL::route('redirect-hello', ['name' => 'iqbal']);
 });
-Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
-Route::get('/redirect/away', [RedirectController::class, 'redirectAway']);
 
-Route::middleware('contoh:qwerty,401')->prefix('/middleware')->group(function () {
+Route::middleware('contoh:qwerty, 401')->prefix('/middleware')->group(function () {
     Route::get('/api', function () {
         return "OK";
     });
@@ -131,16 +132,17 @@ Route::middleware('contoh:qwerty,401')->prefix('/middleware')->group(function ()
     });
 });
 
-Route::get('/url/action', function () {
-    // return action([FormController::class, 'form'],[]);
-    // return url()->action([FormController::class, 'form'],[]);
-    return URL::action([FormController::class, 'form']);
-});
 Route::get('/form', [FormController::class, 'form']);
 Route::post('/form', [FormController::class, 'submitForm']);
 
 Route::get('/url/current', function () {
     return URL::full();
+});
+Route::get('/url/action', function () {
+    // URL untuk controller action
+    // return action([FormController::class, 'form'],[]);
+    // return url()->action([FormController::class, 'form'],[]);
+    return URL::action([FormController::class, 'form']);
 });
 
 Route::get('/session/create', [SessionController::class, 'createSession']);
