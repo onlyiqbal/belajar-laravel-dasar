@@ -9,7 +9,7 @@ class SessionController extends Controller
     public function createSession(Request $request): string
     {
         $request->session()->put('userId', 'iqbal');
-        $request->session()->put('isMember', true);
+        $request->session()->put('isMember', 'true');
 
         return 'OK';
     }
