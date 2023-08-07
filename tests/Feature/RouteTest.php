@@ -18,7 +18,7 @@ class RouteTest extends TestCase
     public function testRedirect()
     {
         $this->get('/youtube')
-            ->assertRedirect('/pzn');
+            ->assertRedirect('/iqbal');
     }
 
     public function testFallback()

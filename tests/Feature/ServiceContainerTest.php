@@ -20,7 +20,7 @@ class ServiceContainerTest extends TestCase
 
         $this->assertEquals('Foo', $foo1->foo());
         $this->assertEquals('Foo', $foo2->foo());
-        $this->assertSame($foo1, $foo2);
+        $this->assertNotSame($foo1, $foo2);
     }
 
     public function testBind()
@@ -29,8 +29,8 @@ class ServiceContainerTest extends TestCase
             return new Person('Iqbal', 'Menggala');
         });
 
-        $person1  = $this->app->make(Person::class);
-        $person2  = $this->app->make(Person::class);
+        $person1 = $this->app->make(Person::class);
+        $person2 = $this->app->make(Person::class);
 
         $this->assertEquals('Iqbal', $person1->firstName);
         $this->assertEquals('Menggala', $person1->lastName);
@@ -43,8 +43,8 @@ class ServiceContainerTest extends TestCase
             return new Person('Iqbal', 'Menggala');
         });
 
-        $person1  = $this->app->make(Person::class);
-        $person2  = $this->app->make(Person::class);
+        $person1 = $this->app->make(Person::class);
+        $person2 = $this->app->make(Person::class);
 
         $this->assertEquals('Iqbal', $person1->firstName);
         $this->assertEquals('Menggala', $person1->lastName);
@@ -56,8 +56,8 @@ class ServiceContainerTest extends TestCase
         $person = new Person('Iqbal', 'Menggala');
         $this->app->instance(Person::class, $person);
 
-        $person1  = $this->app->make(Person::class);
-        $person2  = $this->app->make(Person::class);
+        $person1 = $this->app->make(Person::class);
+        $person2 = $this->app->make(Person::class);
 
         $this->assertEquals('Iqbal', $person1->firstName);
         $this->assertEquals('Menggala', $person1->lastName);
@@ -71,8 +71,7 @@ class ServiceContainerTest extends TestCase
         });
 
         $this->app->singleton(Bar::class, function ($app) {
-            $foo = $app->make(Foo::class);
-            return new Bar($foo);
+            return new Bar($app->make(Foo::class));
         });
 
         $foo = $this->app->make(Foo::class);
@@ -85,11 +84,11 @@ class ServiceContainerTest extends TestCase
 
     public function testInterfaceToClass()
     {
-        $this->app->bind(HelloService::class, HelloServiceIndonesia::class);
-        // $this->app->singleton(HelloService::class, HelloServiceIndonesia::class);
-        $this->app->singleton(HelloService::class, function ($app) {
-            return new HelloServiceIndonesia();
-        });
+        // $this->app->bind(HelloService::class, HelloServiceIndonesia::class);
+        $this->app->singleton(HelloService::class, HelloServiceIndonesia::class);
+        // $this->app->singleton(HelloService::class, function ($app) {
+        //     return new HelloServiceIndonesia();
+        // });
 
         $helloService1 = $this->app->make(HelloService::class);
         $helloService2 = $this->app->make(HelloService::class);

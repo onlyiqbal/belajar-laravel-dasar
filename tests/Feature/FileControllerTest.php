@@ -9,11 +9,12 @@ use Tests\TestCase;
 
 class FileControllerTest extends TestCase
 {
-     public function testUpload(){
-          $image = UploadedFile::fake()->image("iqbal.png");
+    public function testUpload()
+    {
+        $image = UploadedFile::fake()->image("iqbal.png");
 
-          $this->post('/file/upload',[
-               'picture' => $image
-          ])->assertSeeText('OK iqbal.png');
-     }
+        $this->post('/file/upload', [
+            'picture' => $image
+        ])->assertSeeText('OK iqbal.png');
+    }
 }

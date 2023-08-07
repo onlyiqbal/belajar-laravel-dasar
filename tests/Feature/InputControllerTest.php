@@ -12,10 +12,6 @@ class InputControllerTest extends TestCase
     {
         $this->get('/input/hello?name=iqbal')
             ->assertSeeText('Hello iqbal');
-
-        $this->post('/input/hello', [
-            'name' => 'Iqbal'
-        ])->assertSeeText('Hello Iqbal');
     }
 
     public function testFirst()

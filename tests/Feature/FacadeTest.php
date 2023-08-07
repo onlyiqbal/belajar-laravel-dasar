@@ -38,11 +38,11 @@ class FacadeTest extends TestCase
     {
         Config::shouldReceive('get')
             ->with('contoh.author.first')
-            ->andReturn('Iqbal Menggala');
+            ->andReturn('Iqbal Keren');
 
         $firstName = Config::get('contoh.author.first');
 
-        assertEquals('Iqbal Menggala', $firstName);
+        assertEquals('Iqbal Keren', $firstName);
     }
 
     public function testFallback()

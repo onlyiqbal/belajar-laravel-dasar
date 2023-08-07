@@ -36,6 +36,7 @@ Route::fallback(function () {
     return "404 by Iqbal";
 });
 
+
 Route::view('/hello', 'hello', ['name' => 'Iqbal']);
 Route::get('/hello-again', function () {
     return view('hello', ['name' => 'Iqbal']);
@@ -45,11 +46,12 @@ Route::get('/hello-world', function () {
     return view('hello.world', ['name' => 'Iqbal']);
 });
 
+
 Route::get('/products/{id}', function ($productId) {
-    return "Product $productId";
+    return "Product " . $productId;
 })->name('product.detail');
 Route::get('/products/{id}/{item}', function ($productId, $itemId) {
-    return "Product $productId, Item $itemId";
+    return "Product " . $productId . ", Item " . $itemId;
 })->name('product.item.detail');
 Route::get('/categories/{id}', function ($categoriesId) {
     return "Categories $categoriesId";
@@ -58,12 +60,14 @@ Route::get('/user/{id?}', function (string $userId = '404') {
     return "User $userId";
 })->name("user.detail");
 
+
 Route::get('/conflict/iqbal', function () {
     return "Conflict Iqbal Menggala";
 });
 Route::get('/conflict/{name}', function (string $name) {
     return "Conflict $name";
 });
+
 
 Route::get('/produk/{id}', function (string $productId) {
     $link = route('product.detail', [
@@ -77,8 +81,10 @@ Route::get('/produk-redirect/{id}', function (string $id) {
     ]);
 });
 
+
 Route::get('/controller/hello/request', [HelloController::class, 'request']);
 Route::get('/controller/hello/{name}', [HelloController::class, 'hello']);
+
 
 Route::get('/input/hello', [InputController::class, 'hello']);
 Route::post('/input/hello', [InputController::class, 'hello']);
@@ -92,7 +98,9 @@ Route::post('/input/filter/only', [InputController::class, 'filterOnly']);
 Route::post('/input/filter/except', [InputController::class, 'filterExcept']);
 Route::post('/input/filter/merge', [InputController::class, 'filterMerge']);
 
+
 Route::post('/file/upload', [FileController::class, 'upload'])->withoutMiddleware([VerifyCsrfToken::class]);
+
 
 Route::prefix('/response')->group(function () {
     Route::get('/hello', [ResponseController::class, 'response']);
@@ -102,6 +110,7 @@ Route::prefix('/response')->group(function () {
     Route::get('/type/file', [ResponseController::class, 'responseFile']);
     Route::get('/type/download', [ResponseController::class, 'responseDownload']);
 });
+
 
 Route::controller(CookieController::class)->group(function () {
     Route::get('/cookie/set', 'createCookie');
@@ -122,6 +131,7 @@ Route::get('/redirect/named', function () {
     // return route('redirect-hello', ['name' => 'iqbal']);
     // return URL::route('redirect-hello', ['name' => 'iqbal']);
 });
+
 
 Route::middleware('contoh:qwerty, 401')->prefix('/middleware')->group(function () {
     Route::get('/api', function () {
