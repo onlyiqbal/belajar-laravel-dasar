@@ -142,8 +142,10 @@ Route::middleware('contoh:qwerty, 401')->prefix('/middleware')->group(function (
     });
 });
 
+
 Route::get('/form', [FormController::class, 'form']);
 Route::post('/form', [FormController::class, 'submitForm']);
+
 
 Route::get('/url/current', function () {
     return URL::full();
@@ -155,8 +157,10 @@ Route::get('/url/action', function () {
     return URL::action([FormController::class, 'form']);
 });
 
+
 Route::get('/session/create', [SessionController::class, 'createSession']);
 Route::get('/session/get', [SessionController::class, 'getSession']);
+
 
 Route::get('/error/sample', function () {
     throw new Exception("Error Sample");
@@ -168,6 +172,7 @@ Route::get('/error/manual', function () {
 Route::get('/error/validation', function () {
     throw new ValidationException("Validation Error");
 });
+
 
 Route::get('/abort/400', function () {
     abort(400, 'Ups Validation Error');
